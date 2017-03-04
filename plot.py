@@ -12,16 +12,14 @@ def parse(x):
 	return new_x
 
 
-def show_histogram(x, xlabel, ylabel, title):
+def show_histogram(x, xlabel, ylabel, title = ""):
 	plt.hist(x, bins = 30)
 	plt.ylabel(ylabel)
 	plt.xlabel(xlabel)
 	plt.title(title)
 	plt.show()
 
-def render(x):
-	x = parse(x)
-	ylabel = "Count"
-	xlabel = 'upvotes/total votes'
-	title = 'Histogram of helpfulness'
-	show_histogram(x, xlabel, ylabel, title)
+
+def show_scatter_plot(x,y):
+	plt.scatter(x,y)
+	plt.show()

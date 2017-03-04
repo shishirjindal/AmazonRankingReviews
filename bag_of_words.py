@@ -6,6 +6,7 @@ import numpy as np
 from nltk.corpus import stopwords
 import get_data
 import re
+from tqdm import tqdm
 
 class Bag_of_words():
 
@@ -14,7 +15,7 @@ class Bag_of_words():
 
     def gen_bag_for_all(self):
         clean_train_reviews = []
-        for r in self.data_reviews:
+        for r in tqdm(self.data_reviews):
             clean_train_reviews.append(" ".join(self.review_to_wordlist(r["reviewText"], True)))
         return clean_train_reviews
 
@@ -27,7 +28,13 @@ class Bag_of_words():
                                  max_features = 5000)
 
         self.train_data_features = self.vectorizer.fit_transform(clean_train_reviews)
-        self.train_data_features = train_data_features.toarray()
+        self.train_data_features = self.train_data_features.toarray()
+
+        # vocab = self.vectorizer.get_feature_names()
+        # dist = np.sum(self.train_data_features, axis=0)
+        # for tag, count in zip(vocab, dist):
+        #     print count, tag
+
         return self.train_data_features
 
 
